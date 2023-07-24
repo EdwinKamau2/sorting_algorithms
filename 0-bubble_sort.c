@@ -1,4 +1,5 @@
 #include "sort.h"
+#include <stdio.h>
 #include "swap.c"
 
 /**
@@ -8,24 +9,25 @@
 */
 void bubble_sort(int *array, size_t size)
 {
-	size_t i = 0, change = 1;
+	size_t i;
+	int tmp, sorted;
 
-	if (!array || size < 2)
+	if (!array || size == 0)
 		return;
 
-	while (change == 1) 
-	{
-		change = 0;
+	do {
+		sorted = 1;
 		for (i = 0; i < size - 1; i++)
 		{
 			if (array[i] > array[i + 1])
 			{
-				change = 1;
-				swap(array, i);
+				sorted = 0;
+				tmp = array[i];
+				array[i] = array[i + 1];
+				array[i + 1] = tmp;
 				print_array(array, size);
 			}
 		}
-		if (change == 0) 
-			return;
-	}
+
+	} while (sorted == 0);
 }
